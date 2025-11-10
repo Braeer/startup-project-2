@@ -1,4 +1,9 @@
 import { defineConfig, env } from 'prisma/config';
+import 'dotenv/config';
+
+type Env = {
+  POSTGRES_URL: string;
+};
 
 export default defineConfig({
   schema: 'prisma/schema.prisma',
@@ -7,6 +12,6 @@ export default defineConfig({
   },
   engine: 'classic',
   datasource: {
-    url: env('DATABASE_URL'),
+    url: env<Env>('POSTGRES_URL'),
   },
 });
