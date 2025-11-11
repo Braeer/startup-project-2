@@ -35,6 +35,7 @@ export class UsersService {
     });
   }
 
+  // TODO: нужно подтверждение что это тот пользователь что удаляет себя и нужно подтверждение на почту
   async deleteUser(id: string) {
     const user = await this.getById(id);
 
