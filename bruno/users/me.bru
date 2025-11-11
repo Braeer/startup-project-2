@@ -1,0 +1,24 @@
+meta {
+  name: me
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{url}}/users/me
+  body: none
+  auth: bearer
+}
+
+headers {
+  : 
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhMjExQHRlc3QuY29tIiwiaWQiOiJmMzA4ODVhNS02MWZmLTQwNmUtYmU1NC0xM2RkZTMyNDA5NjEiLCJpYXQiOjE3NjI5MDMxNjIsImV4cCI6MjM2NzcwMzE2Mn0.vReQ9wx2Jbfrj7dRAWEYSNV2firfDCEVMPsnCjFwUQA
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
