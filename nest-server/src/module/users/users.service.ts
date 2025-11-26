@@ -12,7 +12,13 @@ export class UsersService {
   }
 
   async getById(id: string) {
-    return await this.prisma.user.findUnique({ where: { id } });
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) {
+      throw new BadRequestException('Пользователь не найден');
+    }
+    const { password, ...rest } = user;
+
+    return rest;
   }
 
   async getUsers() {

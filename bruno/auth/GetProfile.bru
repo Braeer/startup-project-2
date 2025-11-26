@@ -1,11 +1,11 @@
 meta {
-  name: me
+  name: GetProfile
   type: http
-  seq: 2
+  seq: 1
 }
 
 get {
-  url: {{url}}/users/me
+  url: {{url}}/auth/profile
   body: none
   auth: bearer
 }

@@ -15,16 +15,18 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid()) 
+  id String @id @default(uuid())
 
-  email     String   @unique
+  email    String @unique
   password String
-  username      String 
-  
-  isVerified Boolean  @default(false)
+  username String
+
+  isVerified   Boolean @default(false)
   refreshToken String?
-  
+
   verificationCodes VerificationCode[]
+
+  completedQuestions Case[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -35,11 +37,49 @@ model VerificationCode {
   code      String
   expiresAt DateTime
 
-
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Case {
+  id String @id @default(uuid())
+
+  title String
+
+  type       String
+  difficulty String
+  category   String
+
+  fio       String
+  age       Int
+  gender    String
+  medicCard String @map("medic_card")
+  analysis  String
+
+  // answer   String[]
+  // rightAns String   @map("right_ans")
+  // help     String?
+
+  Answers Answer[]
+  users   User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Answer {
+  id String @id @default(uuid())
+
+  questions String[]
+  isCorrect String   @map("is_correct")
+  help      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  case   Case?   @relation(fields: [caseId], references: [id])
+  caseId String?
 }
