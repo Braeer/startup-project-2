@@ -1,3 +1,3 @@
-export const allowedPages = ['/', '/login', '/register'];
+export const allowedPages = ['/', '/auth'];
 
-export const authPage = '/login';
+export const authPage = '/auth';

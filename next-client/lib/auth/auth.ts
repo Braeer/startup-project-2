@@ -5,8 +5,10 @@ export function isPageAllowed(pathname: string): boolean {
   return allowedPages.includes(pathname);
 }
 
-export function redirectToLogin() {
-  return NextResponse.redirect(authPage);
+export function redirectToLogin(req: NextRequest) {
+  const url = new URL(authPage, req.url);
+
+  return NextResponse.redirect(url);
 }
 
 export function getTokenFromRequest(req: NextRequest): string | null {

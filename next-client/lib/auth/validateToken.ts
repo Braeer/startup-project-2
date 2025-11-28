@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import '@/envConfig';
+// import '../../envConfig';
 
 export function validateToken(token: string): boolean {
   try {
