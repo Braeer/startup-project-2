@@ -1,29 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  getTokenFromRequest,
-  isPageAllowed,
-  redirectToLogin,
-  removeInvalidToken,
-  validateToken,
-} from './lib';
+import { isPageAllowed, redirectToLogin } from './lib';
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+export function middleware(req: Request) {
+  // const {  } = req.url;
+  const url = new URL(req.url);
+  const { pathname } = url;
 
   if (isPageAllowed(pathname)) {
     return NextResponse.next();
   }
 
-  const token = getTokenFromRequest(req);
+  const token = req.headers.get('cookie')?.match(/authToken=([^;]+)/)?.[1] || null;
 
   if (!token) {
     return redirectToLogin(req);
-  }
-
-  const valid = validateToken(token);
-
-  if (!valid) {
-    return removeInvalidToken();
   }
 
   return NextResponse.next();
