@@ -6,6 +6,7 @@ import {
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import * as argon2 from 'argon2';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -70,5 +71,13 @@ export class UsersService {
     }
 
     return this.prisma.user.delete({ where: { id } });
+  }
+
+  async updateUser(id: string, dto: UpdateUserDto) {
+    const user = await this.getById(id);
+
+    if (!user) {
+      throw new UnauthorizedException('Пользователь не найден');
+    }
   }
 }

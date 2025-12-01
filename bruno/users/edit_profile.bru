@@ -1,0 +1,16 @@
+meta {
+  name: edit_profile
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{url}}/user/edit
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
