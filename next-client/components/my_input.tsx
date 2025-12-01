@@ -21,7 +21,7 @@ export const MyInput = ({
   ...props
 }: Props) => {
   const [view, setView] = useState(secrue);
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
 
   return (
     <div>
