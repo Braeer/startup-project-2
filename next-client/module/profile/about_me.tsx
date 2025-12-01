@@ -19,7 +19,6 @@ export function AboutMeModule() {
   useEffect(() => {
     getMyProfile().then((res) => {
       setData(res || { email: '', username: '', specialization: '' });
-      console.log(res);
     });
   }, []);
 

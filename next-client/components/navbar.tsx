@@ -7,7 +7,6 @@ export const NavBar = () => {
   const pathnameSource = usePathname();
   const pathname = pathnameSource.split('/').slice(0, 3).join('/');
 
-  console.log(pathname);
   return (
     <nav className="fixed bottom-0 w-full bg-white rounded-t-main">
       <ul className="flex space-x-4 w-full justify-around p-5">

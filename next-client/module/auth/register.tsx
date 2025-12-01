@@ -52,7 +52,6 @@ export function RegisterModule() {
         alert('Ошибка при входе. Проверьте правильность введенных данных.');
       }
     });
-    console.log(data);
   };
 
   return (
