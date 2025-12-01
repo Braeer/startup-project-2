@@ -1,6 +1,6 @@
 import { allowedPages, authPage } from '@/constant';
 import { NextResponse, NextRequest } from 'next/server';
-import { storage } from './tokenStorage';
+import { storage } from '../tokenStorage';
 import { setAuthCookies } from './tokenCokies';
 
 export function isPageAllowed(pathname: string): boolean {

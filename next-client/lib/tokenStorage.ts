@@ -38,23 +38,23 @@ class WebTokenStorage implements TokenStorage {
   }
 }
 
-// export const createTokenStorage = (
-//   type: 'local' | 'session' | 'memory' = 'local',
-//   key: 'auth:token',
-// ): TokenStorage => {
-//   if (!isBrowser) {
-//     return new MemoryStorage();
-//   }
+export const createTokenStorage = (
+  type: 'local' | 'session' | 'memory' = 'local',
+  key: string,
+): TokenStorage => {
+  if (!isBrowser) {
+    return new MemoryStorage();
+  }
 
-//   try {
-//     if (type === 'local') return new WebTokenStorage(window.localStorage, key);
-//     if (type === 'session') return new WebTokenStorage(window.sessionStorage, key);
-//   } catch (error) {
-//     console.error(error);
-//   }
+  try {
+    if (type === 'local') return new WebTokenStorage(window.localStorage, key);
+    if (type === 'session') return new WebTokenStorage(window.sessionStorage, key);
+  } catch (error) {
+    console.error(error);
+  }
 
-//   return new MemoryStorage();
-// };
+  return new MemoryStorage();
+};
 
 export const storage = (() => {
   if (!isBrowser) {
