@@ -12,7 +12,14 @@ interface Props {
   error?: string;
 }
 
-export const MyInput = ({ placeholder, label, secrue = false, success, error }: Props) => {
+export const MyInput = ({
+  placeholder,
+  label,
+  secrue = false,
+  success,
+  error,
+  ...props
+}: Props) => {
   const [view, setView] = useState(secrue);
   const [value, setValue] = useState('');
 
@@ -26,12 +33,13 @@ export const MyInput = ({ placeholder, label, secrue = false, success, error }: 
           id={label}
           placeholder={placeholder}
           type={view ? 'password' : ''}
-          onChange={(e) => setValue(e.target.value)}
-          value={value ?? ''}
+          // onChange={(e) => setValue(e.target.value)}
+          // value={value ?? ''}
           className={cn(
             success ? 'border border-success' : '',
             error ? 'border border-mistake' : '',
           )}
+          {...props}
         />
         {secrue && (
           <button className="absolute right-4 top-3" type="button" onClick={() => setView(!view)}>
