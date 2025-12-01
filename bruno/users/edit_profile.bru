@@ -5,9 +5,19 @@ meta {
 }
 
 put {
-  url: {{url}}/user/edit
-  body: none
-  auth: inherit
+  url: {{url}}/user/profile/edit
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhMnMxMUB0ZXN0LmNvbSIsImlkIjoiYWNhYjU4NDMtYzE2Yi00NDY3LTg5NDItZWE3NTBiZWZiNTgzIiwiaWF0IjoxNzY0NjE1OTA0LCJleHAiOjIzNjk0MTU5MDR9.afQfg1lBR4PpM2DmUbBlxhUPIYQ7WJG97ZAWhhAjdfo
+}
+
+body:json {
+  {
+    "password": "hello123",
+  }
 }
 
 settings {

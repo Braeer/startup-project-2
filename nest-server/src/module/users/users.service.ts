@@ -73,11 +73,50 @@ export class UsersService {
     return this.prisma.user.delete({ where: { id } });
   }
 
-  async updateUser(id: string, dto: UpdateUserDto) {
-    const user = await this.getById(id);
-
-    if (!user) {
-      throw new UnauthorizedException('Пользователь не найден');
+  async updateUser(
+    user: { username: string; email: string; specialty: string; id: string },
+    dto: UpdateUserDto,
+  ) {
+    if (!dto) {
+      throw new BadRequestException('Отсутствуют данные для обновления');
     }
+
+    const updatedData = {
+      username: dto.username || user.username,
+      email: dto.email || user.email,
+      specialty: dto.specialty || user.specialty,
+    };
+
+    if (dto.password) {
+      this._updatePassword(user.id, dto.password);
+    }
+
+    const updatedUser = await this.prisma.user.update({
+      where: { id: user.id },
+      data: updatedData,
+    });
+
+    // await this.prisma.user.update({
+    //   where: { id: user.id },
+    // });
+
+    // if (req == undefined) {
+    //   throw new UnauthorizedException('Пользователь не найден');
+    // }
+    // const user = await this.getById(req.user);
+
+    // if (!user) {
+    //   throw new UnauthorizedException('Пользователь не найден');
+    // }
+
+    return true;
+  }
+
+  async _updatePassword(id: string, newPassword: string) {
+    const hash = await argon2.hash(newPassword);
+    return this.prisma.user.update({
+      where: { id },
+      data: { password: hash },
+    });
   }
 }
