@@ -1,8 +1,15 @@
+'use client';
+
 import { Button, Title } from '@/components/index';
-import { AboutMeModule } from '@/module';
+import { logoutRequest } from '@/lib';
+import { AboutMeModule } from '@/module/index';
 import Link from 'next/link';
 
 export default function ProfilePage() {
+  const logout = () => {
+    logoutRequest();
+  };
+
   return (
     <>
       <Title text="Профиль" />
@@ -22,6 +29,9 @@ export default function ProfilePage() {
           Прочие
         </Button>
       </Link>
+      <Button onClick={logout} variant="outline" size={'lg'} className="mt-4 w-full">
+        Выйти из аккаунта
+      </Button>
     </>
   );
 }

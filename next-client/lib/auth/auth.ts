@@ -29,7 +29,8 @@ export function redirectToLogin(req: Request) {
 // function saveToken
 
 interface AuthPayload {
-  [key: string]: any;
+  email: string;
+  password: string;
 }
 
 export async function authRequest(url: string, payload: AuthPayload): Promise<boolean> {
@@ -56,10 +57,63 @@ export async function authRequest(url: string, payload: AuthPayload): Promise<bo
     storage.setToken(data.access_token);
     setAuthCookies(data.access_token);
 
+    window.location.href = '/dashboard';
+
     return true;
   } catch (error) {
     console.error('Authentication request failed:', error);
     storage.clearToken();
     return false;
+  }
+}
+
+interface RegisterPayload {
+  email: string;
+  password: string;
+  username: string;
+}
+
+export async function registerRequest(url: string, payload: RegisterPayload): Promise<boolean> {
+  try {
+    const fullUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`;
+    const response = await fetch(fullUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      return false;
+    }
+
+    const data = await response.json();
+
+    if (!data.access_token) {
+      return false;
+    }
+
+    storage.setToken(data.access_token);
+    setAuthCookies(data.access_token);
+
+    window.location.href = '/dashboard';
+
+    return true;
+  } catch (error) {
+    console.error('Authentication request failed:', error);
+    storage.clearToken();
+    return false;
+  }
+}
+
+export async function logoutRequest() {
+  try {
+    storage.clearToken();
+    setAuthCookies('');
+
+    window.location.href = '/auth/login';
+  } catch (error) {
+    console.error();
   }
 }

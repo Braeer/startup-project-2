@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/index';
 import { MyInput } from '@/components/my_input';
+import { authRequest } from '@/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -29,7 +30,11 @@ export function LoginModule() {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    console.log('Данные формы:', data);
+    authRequest('/auth/login', { email: data.email, password: data.password }).then((success) => {
+      if (!success) {
+        alert('Ошибка при входе. Проверьте правильность введенных данных.');
+      }
+    });
   };
 
   return (

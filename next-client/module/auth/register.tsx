@@ -3,6 +3,7 @@
 import { Button } from '@/components/index';
 import { MyInput } from '@/components/my_input';
 import { Checkbox } from '@/components/ui/checkbox';
+import { registerRequest } from '@/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -42,7 +43,16 @@ export function RegisterModule() {
   });
 
   const onSubmit = async (data: RegisterFormValues) => {
-    console.log('Данные формы:', data);
+    registerRequest('/auth/register', {
+      email: data.email,
+      password: data.password,
+      username: data.name,
+    }).then((success) => {
+      if (!success) {
+        alert('Ошибка при входе. Проверьте правильность введенных данных.');
+      }
+    });
+    console.log(data);
   };
 
   return (
