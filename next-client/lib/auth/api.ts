@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { storage } from './tokenStorage';
+import { storage } from '../tokenStorage';
 import { clearAuthCookies } from './tokenCokies';
 import { authPage } from '@/constant';
 
