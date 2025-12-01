@@ -14,11 +14,11 @@ const Item = ({ label, value }: { label: string; value: string }) => {
 };
 
 export function AboutMeModule() {
-  const [data, setData] = useState({ email: '', username: '' });
+  const [data, setData] = useState({ email: '', username: '', specialization: '' });
 
   useEffect(() => {
     getMyProfile().then((res) => {
-      setData(res || { email: '', username: '' });
+      setData(res || { email: '', username: '', specialization: '' });
       console.log(res);
     });
   }, []);
@@ -29,7 +29,7 @@ export function AboutMeModule() {
       <div className="flex flex-col gap-4 my-4">
         <Item label="Почта" value={data.email} />
         <Item label="Имя" value={data.username} />
-        <Item label="Специализация" value="Ветеринар" />
+        <Item label="Специализация" value={data.specialization} />
       </div>
     </Container>
   );
