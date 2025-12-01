@@ -69,7 +69,7 @@ export function RegisterModule() {
             placeholder="Введите пароль"
             secrue
             error={errors.password?.message}
-            success={!errors.password && watch('password')?.length > 6}
+            success={!errors.password && watch('password')?.length >= 6}
             {...register('password')}
           />
           <MyInput
@@ -79,7 +79,7 @@ export function RegisterModule() {
             error={errors.confirmPassword?.message}
             success={
               !errors.confirmPassword &&
-              watch('confirmPassword')?.length > 6 &&
+              watch('confirmPassword')?.length >= 6 &&
               watch('password') === watch('confirmPassword')
             }
             {...register('confirmPassword')}
