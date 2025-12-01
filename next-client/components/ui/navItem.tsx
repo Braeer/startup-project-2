@@ -1,5 +1,6 @@
 import { cn } from '@/lib';
 import { Icon } from './icon';
+import Link from 'next/link';
 
 type Props = {
   logoPath: string;
@@ -110,14 +111,14 @@ export const NavItem = ({ logoPath, title, href, active }: Props) => {
 
   return (
     <li>
-      <a href={href}>
+      <Link href={href}>
         <div className={cn('flex flex-col items-center justify-center', active && 'text-acent')}>
           {/* !Здесь говно код */}
           {active ? logoElement : <Icon path={logoPath} />}
 
           <span className="mt-2 text-[12px]">{title}</span>
         </div>
-      </a>
+      </Link>
     </li>
   );
 };

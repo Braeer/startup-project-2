@@ -1,3 +1,11 @@
-export function Container({ children }: { children: React.ReactNode }) {
-  return <section className="bg-bluebg rounded-main p-2">{children}</section>;
+import { cn } from '@/lib';
+
+export function Container({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <section className={cn('bg-bluebg rounded-main p-2 my-4', className)}>{children}</section>;
 }
