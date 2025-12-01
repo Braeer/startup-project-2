@@ -30,6 +30,7 @@
   --color-input: var(--cinput);
   --color-ring: var(--ring);
   --color-border: var(--border);
+  --color-disabled: var(--disabled);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -60,6 +61,7 @@
   --mistake: #f05a5a;
   --warning: #d2a158;
   --cinput: #eceefe;
+  --disabled: #cecece;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
