@@ -27,7 +27,7 @@
   --color-warning: var(--warning);
   --color-mistake: var(--mistake);
   --color-success: var(--success);
-  --color-input: var(--cinput);
+  --color-bluebg: var(--cinput);
   --color-ring: var(--ring);
   --color-border: var(--border);
   --color-disabled: var(--disabled);
