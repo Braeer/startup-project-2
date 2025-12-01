@@ -7,6 +7,7 @@ import { PrismaService } from 'src/core/prisma/prisma.service';
 import * as argon2 from 'argon2';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Injectable()
 export class UsersService {
@@ -87,36 +88,49 @@ export class UsersService {
       specialty: dto.specialty || user.specialty,
     };
 
-    if (dto.password) {
-      this._updatePassword(user.id, dto.password);
-    }
-
-    const updatedUser = await this.prisma.user.update({
+    const res = await this.prisma.user.update({
       where: { id: user.id },
       data: updatedData,
+      select: {
+        id: true,
+        username: true,
+        email: true,
+        specialty: true,
+      },
     });
 
-    // await this.prisma.user.update({
-    //   where: { id: user.id },
-    // });
-
-    // if (req == undefined) {
-    //   throw new UnauthorizedException('Пользователь не найден');
-    // }
-    // const user = await this.getById(req.user);
-
-    // if (!user) {
-    //   throw new UnauthorizedException('Пользователь не найден');
-    // }
-
-    return true;
+    return res;
   }
 
-  async _updatePassword(id: string, newPassword: string) {
-    const hash = await argon2.hash(newPassword);
-    return this.prisma.user.update({
-      where: { id },
+  async updatePassword(
+    userId: { id: string; password: string },
+    dto: UpdatePasswordDto,
+  ) {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId.id },
+    });
+
+    if (!user) {
+      throw new BadRequestException('Неверный пользователь или пароль');
+    }
+
+    const isPasswordValid = await argon2.verify(user.password, dto.password);
+
+    if (!isPasswordValid) {
+      throw new BadRequestException('Неверный пользователь или пароль');
+    }
+
+    if (dto.newPassword !== dto.confirmPassword) {
+      throw new BadRequestException('Пароли не совпадают');
+    }
+
+    const hash = await argon2.hash(dto.newPassword);
+
+    await this.prisma.user.update({
+      where: { id: userId.id },
       data: { password: hash },
     });
+
+    return true;
   }
 }
