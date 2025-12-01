@@ -4,7 +4,10 @@ import { storage } from './tokenStorage';
 import { setAuthCookies } from './tokenCokies';
 
 export function isPageAllowed(pathname: string): boolean {
-  return allowedPages.includes(pathname);
+  if (pathname === '/') return true;
+  // return allowedPages.includes(pathname);
+
+  return allowedPages.some((page) => page !== '/' && pathname.startsWith(page));
 }
 
 export function redirectToLogin(req: Request) {

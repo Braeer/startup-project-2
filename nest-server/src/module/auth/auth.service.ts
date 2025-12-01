@@ -59,15 +59,4 @@ export class AuthService {
       user: user,
     };
   }
-
-  async getProfile(data: any) {
-    const result = data.user;
-    // const user = await this.userService.getById(`${userId}`);
-    // if (!user) {
-    //   throw new BadRequestException('Пользователь не найден');
-    // }
-    // return profile;
-
-    return result;
-  }
 }

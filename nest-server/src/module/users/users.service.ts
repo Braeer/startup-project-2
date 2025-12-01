@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import * as argon2 from 'argon2';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -14,15 +18,31 @@ export class UsersService {
   async getById(id: string) {
     const user = await this.prisma.user.findUnique({ where: { id } });
     if (!user) {
-      throw new BadRequestException('Пользователь не найден');
+      throw new UnauthorizedException('Пользователь не найден');
     }
     const { password, ...rest } = user;
 
     return rest;
   }
 
+  async getProfile(payload: any) {
+    if (!payload || !payload.id) {
+      throw new UnauthorizedException('Пользователь не найден');
+    }
+
+    const user = this.getById(payload.id);
+
+    return user;
+  }
+
   async getUsers() {
-    return await this.prisma.user.findMany();
+    return await this.prisma.user.findMany({
+      select: {
+        id: true,
+        username: true,
+        email: true,
+      },
+    });
   }
 
   async createUser(dto: CreateUserDto) {
@@ -46,7 +66,7 @@ export class UsersService {
     const user = await this.getById(id);
 
     if (!user) {
-      throw new BadRequestException('Пользователь не найден');
+      throw new UnauthorizedException('Пользователь не найден');
     }
 
     return this.prisma.user.delete({ where: { id } });

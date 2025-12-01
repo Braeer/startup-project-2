@@ -29,7 +29,7 @@ export const MyInput = ({ placeholder, label, secrue = false, bottomText }: Prop
         />
         {secrue && (
           <button className="absolute right-4 top-3" type="button" onClick={() => setView(!view)}>
-            {view ? 'Show' : 'Hide'}
+            {view ? <Icon path="/icons/eye.svg" /> : 'Hide'}
           </button>
         )}
       </div>

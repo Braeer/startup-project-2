@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
+import { CreateCaseDto } from './dto/create-case.dto';
 
 @Injectable()
 export class CasesService {
@@ -13,5 +14,9 @@ export class CasesService {
     }
 
     return result;
+  }
+
+  async createCase(data: CreateCaseDto) {
+    return true;
   }
 }
