@@ -1,7 +1,6 @@
 'use client';
 
-import { Button } from '@/components/index';
-import { MyInput } from '@/components/my_input';
+import { Button, MyInput } from '@/components/index';
 import { authRequest } from '@/lib';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

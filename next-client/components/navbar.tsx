@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { NavItem } from './ui/navItem';
+import { NavItem } from './index';
 
 export const NavBar = () => {
   const pathnameSource = usePathname();

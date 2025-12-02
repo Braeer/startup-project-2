@@ -1,5 +1,5 @@
 import { allowedPages, authPage } from '@/constant';
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { storage } from '../tokenStorage';
 import { setAuthCookies } from './tokenCokies';
 

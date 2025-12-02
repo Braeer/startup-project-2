@@ -1,7 +1,7 @@
 'use client';
 
 import { Container } from '@/components/ui/container';
-import { getMyProfile } from '@/services/user/get_profile';
+import { getMyProfile } from '@/services/profile/get_profile';
 import { useEffect, useState } from 'react';
 
 const Item = ({ label, value }: { label: string; value: string }) => {
@@ -24,7 +24,6 @@ export function AboutMeModule() {
 
   return (
     <Container>
-      <h2>Данные об аккаунте</h2>
       <div className="flex flex-col gap-4 my-4">
         <Item label="Почта" value={data.email} />
         <Item label="Имя" value={data.username} />

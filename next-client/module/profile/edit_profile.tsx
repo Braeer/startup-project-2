@@ -1,8 +1,7 @@
 'use client';
 
 import { Button, MyInput } from '@/components/index';
-import { editMyProfile } from '@/services/user/edit_profile';
-import { user_session_storage } from '@/services/user/get_profile';
+import { editMyProfile, user_session_storage } from '@/services/index';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';

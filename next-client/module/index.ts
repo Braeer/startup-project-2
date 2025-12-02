@@ -3,4 +3,5 @@ export * from './auth/register';
 export * from './profile/about_me';
 export * from './profile/edit_password';
 export * from './profile/edit_profile';
+export * from './profile/list_buttons';
 export * from './profile/other';
