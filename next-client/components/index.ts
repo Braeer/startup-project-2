@@ -1,3 +1,4 @@
+export * from './container_wich_title';
 export * from './my_input';
 export * from './navbar';
 export * from './ui/back_screen_title';

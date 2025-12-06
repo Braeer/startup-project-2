@@ -7,5 +7,5 @@ export function Container({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <section className={cn('bg-bluebg rounded-main p-2 my-4', className)}>{children}</section>;
+  return <section className={cn('bg-bluebg rounded-main p-4 my-4', className)}>{children}</section>;
 }
