@@ -1,3 +1,4 @@
+export * from './cases/filters';
 export * from './container_wich_title';
 export * from './my_input';
 export * from './navbar';
@@ -9,4 +10,6 @@ export * from './ui/icon';
 export * from './ui/input';
 export * from './ui/label';
 export * from './ui/navItem';
+export * from './ui/sheet';
 export * from './ui/title';
+export * from './ui/select';
