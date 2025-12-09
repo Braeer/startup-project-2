@@ -10,12 +10,12 @@ export const NavBar = () => {
   return (
     <nav className="fixed bottom-0 w-full bg-white rounded-t-main">
       <ul className="flex space-x-4 w-full justify-around p-5">
-        <NavItem
+        {/* <NavItem
           href="/dashboard"
           logoPath="/icons/home.svg"
           title="Главная"
           active={pathname === '/dashboard'}
-        />
+        /> */}
         <NavItem
           href="/dashboard/cases"
           logoPath="/icons/cases.svg"
