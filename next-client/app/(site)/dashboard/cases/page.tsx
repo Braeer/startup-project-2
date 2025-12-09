@@ -4,9 +4,18 @@ import Link from 'next/link';
 export default function CasesPage() {
   return (
     <div>
-      <Title text="Профиль" />
-      <div>
-        <ContainerWichTitle title="Мои ошибки">
+      <Title text="Кейсы" />
+      <div className="flex flex-col h-[calc(100vh-150px)] justify-between">
+        <div className="flex flex-col items-center justify-center gap-4 my-auto">
+          <Button variant={'default'} size={'lg'} className="min-w-[200px]">
+            Начать тест
+          </Button>
+          <Button variant={'outline'} size={'sm'}>
+            Фильтр
+          </Button>
+        </div>
+
+        <ContainerWichTitle title="Мои ошибки" className="max-w-[700px] mx-auto">
           <div>
             <p>
               В данном разделе вы можете ознакомится со своими ошибками и решить тест составленый с
