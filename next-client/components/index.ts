@@ -13,3 +13,4 @@ export * from './ui/navItem';
 export * from './ui/sheet';
 export * from './ui/title';
 export * from './ui/select';
+export * from './my_select';

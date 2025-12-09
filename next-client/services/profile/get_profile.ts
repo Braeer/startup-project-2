@@ -1,7 +1,5 @@
-import { createTokenStorage } from '@/lib';
 import { api } from '@/lib/auth/api';
-
-export const user_session_storage = createTokenStorage('session', 'user');
+import { user_session_storage } from '@/store/web_storage';
 
 export async function getMyProfile() {
   try {
