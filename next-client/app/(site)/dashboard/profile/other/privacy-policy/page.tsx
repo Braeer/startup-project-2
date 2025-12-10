@@ -4,7 +4,7 @@ export default function PrivacyPolicyPage() {
   return (
     <section>
       <BackScreenTitle sizeText="md" title="Политика конфиденциальности" />
-      <div className="overflow-scroll ">
+      <div className="overflow-auto ">
         <p className="pb-30">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit corporis
           repudiandae adipisci minus aliquam, labore magnam vitae iure ipsa at iusto. Eligendi nam
