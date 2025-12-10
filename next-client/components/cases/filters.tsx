@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, MySelect, Sheet, SheetContent, SheetTitle, Title } from '../index';
 import { filtersInterface } from '@/@types/filers';
 import { filters_local_storage } from '@/store/web_storage';
@@ -10,19 +10,35 @@ type Props = {
 };
 
 export const CasesFilters = ({ open, onOpenChange }: Props) => {
-  const [data, setData] = useState<filtersInterface | null>(null);
-  const [specialty, setSpecialty] = useState<string | undefined>(undefined);
-  const [questionsCount, setQuestionsCount] = useState<string | undefined>(undefined);
-  const [difficulty, setDifficulty] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
+  const getInitialFilter = () => {
     const storedFilters = filters_local_storage.getToken();
-    if (storedFilters) {
-      setSpecialty(JSON.parse(storedFilters).specialty);
-      setQuestionsCount(JSON.parse(storedFilters).questions_count);
-      setDifficulty(JSON.parse(storedFilters).difficulty);
+    const allUndefined = {
+      specialty: undefined,
+      questions_count: undefined,
+      difficulty: undefined,
+    };
+
+    if (!storedFilters) return allUndefined;
+
+    try {
+      const parsed = JSON.parse(storedFilters) as filtersInterface;
+
+      return {
+        specialty: parsed.specialty || undefined,
+        questions_count: parsed.questions_count || undefined,
+        difficulty: parsed.difficulty || undefined,
+      };
+    } catch (error) {
+      console.error(error);
+      return allUndefined;
     }
-  }, []);
+  };
+
+  const initial = getInitialFilter();
+
+  const [specialty, setSpecialty] = useState<string | undefined>(initial.specialty);
+  const [questionsCount, setQuestionsCount] = useState<string | undefined>(initial.questions_count);
+  const [difficulty, setDifficulty] = useState<string | undefined>(initial.difficulty);
 
   const handleApplyFilters = () => {
     const newFilters: filtersInterface = {
@@ -31,7 +47,6 @@ export const CasesFilters = ({ open, onOpenChange }: Props) => {
       difficulty,
     };
 
-    setData(newFilters);
     filters_local_storage.setToken(JSON.stringify(newFilters));
     onOpenChange(false);
   };
