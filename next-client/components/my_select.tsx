@@ -15,8 +15,8 @@ export const MySelect = ({ value, label, placeholder, variants, onValueChange }:
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label className="text-text-black text-lg mb-0">{label}</Label>
+    <div className="mx-auto max-w-[700px] mt-6">
+      <Label className="text-text-black text-lg mb-2">{label}</Label>
       <Select value={value} onValueChange={onValueChange}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
