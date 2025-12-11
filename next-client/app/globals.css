@@ -139,3 +139,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  min-width: 375px;
+}

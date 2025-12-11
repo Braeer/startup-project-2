@@ -1,3 +1,4 @@
+export * from './handbooks/get_handbook_by_id';
 export * from './handbooks/get_handbooks';
 export * from './handbooks/get_handbooks_by_types';
 export * from './handbooks/get_handbooks_types';
