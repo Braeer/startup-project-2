@@ -25,6 +25,7 @@ model User {
   isVerified   Boolean @default(false)
   refreshToken String?
 
+  favoriteHandBooks FavoriteHandBooks[]
   verificationCodes VerificationCode[]
 
   completedQuestions Case[]
@@ -83,4 +84,28 @@ model Answer {
 
   case   Case?   @relation(fields: [caseId], references: [id])
   caseId String?
+}
+
+model FavoriteHandBooks {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  handbookId String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+model Handbook {
+  id String @id @default(uuid())
+
+  title   String
+  content String
+  type    String
+  subtype String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 }
