@@ -1,21 +1,24 @@
 meta {
-  name: getCaseById
+  name: saveUserCompletedCase
   type: http
-  seq: 1
+  seq: 3
 }
 
-get {
-  url: {{url}}/cases/get-by-id/918380f9-9023-41f8-ad74-6c984c0f91b2
-  body: none
+post {
+  url: {{url}}/cases/user/save-case
+  body: json
   auth: bearer
-}
-
-headers {
-  : 
 }
 
 auth:bearer {
   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RhMnMxMUB0ZXN0LmNvbSIsImlkIjoiZWQ1NDdlODMtNGQwMC00ODUyLTk0MmMtYjNjNDU2MGQxY2Q1IiwiaWF0IjoxNzY1NDM3NDg2LCJleHAiOjIzNzAyMzc0ODZ9.-tIQfeexyPQZ9JVDhBHlFDzGL00Q3-1welaMrEtPzCw
+}
+
+body:json {
+  {
+    "variant": "error",
+    "caseId": "918380f9-9023-41f8-ad74-6c984c0f91b2"
+  }
 }
 
 settings {

@@ -28,7 +28,7 @@ model User {
   favoriteHandBooks FavoriteHandBooks[]
   verificationCodes VerificationCode[]
 
-  completedQuestions ComplitedQuestion[]
+  completedQuestions ComplitedCase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -59,7 +59,7 @@ model VerificationCode {
 //   updatedAt DateTime @updatedAt @map("updated_at")
 // }
 
-model ComplitedQuestion {
+model ComplitedCase {
   id String @id @default(uuid())
 
   type CompletionStatus @default(success)
@@ -96,7 +96,7 @@ model Case {
   answers       String[]
   correctAnswer String   @map("correct_answer")
 
-  complitedQuestions ComplitedQuestion[]
+  complitedQuestions ComplitedCase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

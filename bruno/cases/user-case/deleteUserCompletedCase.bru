@@ -1,17 +1,13 @@
 meta {
-  name: getCaseById
+  name: deleteUserCompletedCase
   type: http
-  seq: 1
+  seq: 4
 }
 
-get {
-  url: {{url}}/cases/get-by-id/918380f9-9023-41f8-ad74-6c984c0f91b2
+delete {
+  url: {{url}}/cases/user/delete-case/0ae3719b-4e88-44c6-b729-c65a68255476
   body: none
   auth: bearer
-}
-
-headers {
-  : 
 }
 
 auth:bearer {

@@ -1,17 +1,13 @@
 meta {
-  name: getCaseById
+  name: updateUserCompletedCase
   type: http
-  seq: 1
+  seq: 5
 }
 
-get {
-  url: {{url}}/cases/get-by-id/918380f9-9023-41f8-ad74-6c984c0f91b2
+put {
+  url: {{url}}/cases/user/update-case/7a217bca-8dc6-4d07-b8c8-71ed8fe15c66
   body: none
   auth: bearer
-}
-
-headers {
-  : 
 }
 
 auth:bearer {

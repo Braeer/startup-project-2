@@ -1,6 +1,12 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { CreateCaseDto } from './dto/create-case.dto';
+import { SaveUserCompleteCaseDto } from './dto/save-user-complete.dto';
 
 @Injectable()
 export class CasesService {
@@ -14,10 +20,6 @@ export class CasesService {
     }
 
     return result;
-  }
-
-  createCase(data: CreateCaseDto) {
-    return true;
   }
 
   async getCaseById(id: number) {
@@ -76,17 +78,92 @@ export class CasesService {
     return selected;
   }
 
-  async getUserCompletedCases(userId: string) {
-    const completedCases = await this.prisma.complitedQuestion.findMany({
+  async getUserCompletedCases(userId: string, variant: 'success' | 'error') {
+    const completedCases = await this.prisma.complitedCase.findMany({
       where: {
         userId,
-        type: 'success',
-      },
-      select: {
-        id: true,
+        type: variant,
       },
     });
 
     return completedCases;
+  }
+
+  async saveUserCompletedCase(userId: string, dto: SaveUserCompleteCaseDto) {
+    const caseExists = await this.prisma.case.findUnique({
+      where: { id: dto.caseId },
+    });
+
+    if (!caseExists) {
+      throw new BadRequestException('Case not found');
+    }
+
+    const existingRecord = await this.prisma.complitedCase.findFirst({
+      where: {
+        userId,
+        caseId: dto.caseId,
+      },
+    });
+
+    if (existingRecord) {
+      return await this.prisma.complitedCase.update({
+        where: { id: existingRecord.id },
+        data: { type: dto.variant },
+      });
+    }
+
+    const completedCase = await this.prisma.complitedCase.create({
+      data: {
+        userId,
+        caseId: dto.caseId,
+        type: dto.variant,
+      },
+    });
+
+    return completedCase;
+  }
+
+  async getUserCompletedCaseById(userId: string, Id: string) {
+    const completedCase = await this.prisma.complitedCase.findFirst({
+      where: {
+        userId,
+        id: Id,
+      },
+      include: {
+        case: true,
+      },
+    });
+
+    if (!completedCase) {
+      throw new NotFoundException('Completed case not found');
+    }
+
+    return completedCase;
+  }
+
+  async updateUserCompletedCase(userId: string, id: string) {
+    await this.prisma.complitedCase.updateMany({
+      where: {
+        userId,
+        id,
+        type: 'error',
+      },
+      data: {
+        type: 'success',
+      },
+    });
+
+    return true;
+  }
+
+  async deleteUserCompletedCase(userId: string, id: string) {
+    const deleted = await this.prisma.complitedCase.delete({
+      where: {
+        userId,
+        id,
+      },
+    });
+
+    return deleted;
   }
 }
