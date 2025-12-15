@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from './generated/client';
 import { BadRequestException, Logger } from '@nestjs/common';
 import { HANDBOOKS } from './data/handbooks';
+import { CASES } from './data/cases';
 import * as dotenv from 'dotenv';
 
 const prisma = new PrismaClient({
@@ -15,7 +16,10 @@ async function main() {
   try {
     Logger.log('Начало заполнения базы данных');
 
-    await prisma.$transaction([prisma.handbook.deleteMany()]);
+    await prisma.$transaction([
+      prisma.handbook.deleteMany(),
+      prisma.case.deleteMany(),
+    ]);
 
     await prisma.$transaction(async (tx) => {
       for (const handbook of HANDBOOKS) {
@@ -25,6 +29,24 @@ async function main() {
             content: handbook.content,
             type: handbook.type,
             subtype: handbook.subtype,
+          },
+        });
+      }
+
+      for (const caseItem of CASES) {
+        await tx.case.create({
+          data: {
+            title: caseItem.title,
+            type: caseItem.type,
+            difficulty: caseItem.difficulty,
+            fio: caseItem.fio,
+            age: caseItem.age,
+            gender: caseItem.gender,
+            help: caseItem.help,
+            clinicalCase: caseItem.clinical_case,
+            analysis: caseItem.analysis,
+            answers: caseItem.answers,
+            correctAnswer: caseItem.correct_answer,
           },
         });
       }

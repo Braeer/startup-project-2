@@ -28,7 +28,7 @@ model User {
   favoriteHandBooks FavoriteHandBooks[]
   verificationCodes VerificationCode[]
 
-  completedQuestions Case[]
+  completedQuestions ComplitedQuestion[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -46,6 +46,34 @@ model VerificationCode {
   updatedAt DateTime @updatedAt
 }
 
+// model FaultyCase {
+//   id String @id @default(uuid())
+
+//   caseId String
+//   case   Case   @relation(fields: [caseId], references: [id])
+
+//   userId String
+//   user   User   @relation(fields: [userId], references: [id])
+
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+// }
+
+model ComplitedQuestion {
+  id String @id @default(uuid())
+
+  type CompletionStatus @default(success)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  caseId String
+  case   Case   @relation(fields: [caseId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+}
+
 model Case {
   id String @id @default(uuid())
 
@@ -53,38 +81,40 @@ model Case {
 
   type       String
   difficulty String
-  category   String
 
-  fio       String
-  age       Int
-  gender    String
-  medicCard String @map("medic_card")
-  analysis  String
+  fio          String
+  age          Int
+  gender       String
+  analysis     String[]
+  help         String
+  clinicalCase String   @map("clinical_case")
 
   // answer   String[]
   // rightAns String   @map("right_ans")
   // help     String?
 
-  Answers Answer[]
-  users   User[]
+  answers       String[]
+  correctAnswer String   @map("correct_answer")
+
+  complitedQuestions ComplitedQuestion[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Answer {
-  id String @id @default(uuid())
+// model Answer {
+//   id String @id @default(uuid())
 
-  questions String[]
-  isCorrect String   @map("is_correct")
-  help      String?
+//   questions String[]
+//   isCorrect String   @map("is_correct")
+//   help      String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
 
-  case   Case?   @relation(fields: [caseId], references: [id])
-  caseId String?
-}
+//   case   Case?   @relation(fields: [caseId], references: [id])
+//   caseId String?
+// }
 
 model FavoriteHandBooks {
   id String @id @default(uuid())
@@ -108,4 +138,9 @@ model Handbook {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+}
+
+enum CompletionStatus {
+  error
+  success
 }

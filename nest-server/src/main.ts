@@ -9,6 +9,7 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   app.useGlobalPipes(new ValidationPipe());
+  app.setGlobalPrefix('api');
 
   app.enableCors({
     origin: config.getOrThrow<string>('ALLOWED_ORIGIN'),

@@ -1,13 +1,17 @@
 meta {
-  name: all_Cases
+  name: getRandomCasesId
   type: http
   seq: 3
 }
 
 get {
-  url: {{url}}/cases/all
+  url: {{url}}/cases/random?count=5
   body: none
   auth: bearer
+}
+
+params:query {
+  count: 5
 }
 
 headers {
