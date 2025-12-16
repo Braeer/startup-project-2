@@ -10,9 +10,11 @@ export const StartCaseModule = () => {
   return (
     <div className="flex flex-col h-[calc(100vh-150px)] justify-between">
       <div className="flex flex-col items-center justify-center gap-4 my-auto">
-        <Button variant={'default'} size={'lg'} className="min-w-[200px]">
-          Начать тест
-        </Button>
+        <Link href={'/test'}>
+          <Button variant={'default'} size={'lg'} className="min-w-[200px]">
+            Начать тест
+          </Button>
+        </Link>
         <Button variant={'outline'} size={'sm'} onClick={() => setOpenFilter(true)}>
           Фильтр
         </Button>

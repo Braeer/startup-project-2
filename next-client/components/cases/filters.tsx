@@ -75,7 +75,7 @@ export const CasesFilters = ({ open, onOpenChange }: Props) => {
             <MySelect
               label="Сложность"
               placeholder="Выберете сложность"
-              variants={['normal', 'hard']}
+              variants={['Легкий', 'Нормальный', 'Сложный']}
               onValueChange={setDifficulty}
               value={difficulty}
             />
