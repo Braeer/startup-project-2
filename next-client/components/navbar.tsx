@@ -8,7 +8,7 @@ export const NavBar = () => {
   const pathname = pathnameSource.split('/').slice(0, 3).join('/');
 
   return (
-    <nav className="fixed bottom-0 w-full bg-white rounded-t-main">
+    <nav className="fixed bottom-0 w-full bg-white rounded-t-main max-w-[900px]">
       <ul className="flex space-x-4 w-full justify-around p-5">
         {/* <NavItem
           href="/dashboard"

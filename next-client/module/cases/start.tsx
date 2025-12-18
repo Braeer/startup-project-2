@@ -32,9 +32,9 @@ export const StartCaseModule = () => {
             <Button asChild variant="default">
               <Link href="/dashboard/profile/errors">Ошибки</Link>
             </Button>
-            <Button asChild variant="outline">
+            {/* <Button asChild variant="outline">
               <Link href="/dashboard/profile/errors/test">Перейти к тесту</Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </ContainerWichTitle>

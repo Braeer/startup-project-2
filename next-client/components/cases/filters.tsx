@@ -9,6 +9,17 @@ type Props = {
   onOpenChange: (open: boolean) => void;
 };
 
+const specialtyVariants = [
+  { label: 'общий', value: 'general' },
+  { label: 'неврология', value: 'neurology' },
+];
+
+const difficultyVariants = [
+  { label: 'легкий', value: 'easy' },
+  { label: 'нормальный', value: 'normal' },
+  { label: 'сложный', value: 'hard' },
+];
+
 export const CasesFilters = ({ open, onOpenChange }: Props) => {
   const getInitialFilter = () => {
     const storedFilters = filters_local_storage.getToken();
@@ -42,12 +53,13 @@ export const CasesFilters = ({ open, onOpenChange }: Props) => {
 
   const handleApplyFilters = () => {
     const newFilters: filtersInterface = {
-      specialty,
+      specialty: specialty,
       questions_count: questionsCount,
-      difficulty,
+      difficulty: difficulty,
     };
 
     filters_local_storage.setToken(JSON.stringify(newFilters));
+    console.log(newFilters);
     onOpenChange(false);
   };
 
@@ -61,9 +73,12 @@ export const CasesFilters = ({ open, onOpenChange }: Props) => {
             <MySelect
               label="По специальности / направлению"
               placeholder="Выберете направление"
-              variants={['общий', 'хирургия']}
-              onValueChange={setSpecialty}
-              value={specialty}
+              variants={specialtyVariants.map((item) => item.label)}
+              onValueChange={(value) => {
+                const found = specialtyVariants.find((item) => item.label === value);
+                setSpecialty(found ? found.value : undefined);
+              }}
+              value={specialtyVariants.find((item) => item.value === specialty)?.label || ''}
             />
             <MySelect
               label="Количество вопросов"
@@ -75,9 +90,12 @@ export const CasesFilters = ({ open, onOpenChange }: Props) => {
             <MySelect
               label="Сложность"
               placeholder="Выберете сложность"
-              variants={['Легкий', 'Нормальный', 'Сложный']}
-              onValueChange={setDifficulty}
-              value={difficulty}
+              variants={difficultyVariants.map((item) => item.label)}
+              onValueChange={(value) => {
+                const found = difficultyVariants.find((item) => item.label === value);
+                setDifficulty(found ? found.value : undefined);
+              }}
+              value={difficultyVariants.find((item) => item.value === difficulty)?.label || ''}
             />
           </div>
 

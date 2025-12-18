@@ -14,8 +14,8 @@ type Props = {
   help: string;
   result: string;
   answers: string[];
-  numberQuestion: number;
-  maxQuestions: number;
+  numberQuestion?: number;
+  maxQuestions?: number;
   calbackAnswer: (answer: boolean) => void;
 };
 
@@ -35,6 +35,7 @@ export const TestBlock = ({
   const [active, setActive] = useState<number | null>(null);
 
   const handleAnswerClick = () => {
+    setActive(null);
     if (active === null) return;
 
     if (answers[active! - 1] === result) {
@@ -134,7 +135,9 @@ export const TestBlock = ({
 
       <div className="mx-4 mb-10">
         <Button className="w-full" size="lg" disabled={active === null} onClick={handleAnswerClick}>
-          {numberQuestion < maxQuestions ? 'Следующий вопрос' : 'Завершить тест'}
+          {maxQuestions && numberQuestion && numberQuestion < maxQuestions
+            ? 'Следующий вопрос'
+            : 'Завершить тест'}
         </Button>
       </div>
     </section>

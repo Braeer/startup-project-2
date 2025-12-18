@@ -1,3 +1,6 @@
+export * from './cases/get-all-cases';
+export * from './cases/get-case-by-id';
+export * from './cases/get-case-wich-settings';
 export * from './cases/user/delete_user_completed_case';
 export * from './cases/user/get_user_completed_case';
 export * from './cases/user/get_user_completed_case_by_id';

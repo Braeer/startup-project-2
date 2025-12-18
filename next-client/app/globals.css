@@ -142,4 +142,8 @@
 
 body {
   min-width: 375px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--color-zinc-50);
+  overflow: hidden;
 }
