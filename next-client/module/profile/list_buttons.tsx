@@ -21,11 +21,11 @@ export const ListButtons = () => {
           Редактировать пароль
         </Button>
       </Link>
-      <Link href="/dashboard/profile/favorites">
+      {/* <Link href="/dashboard/profile/favorites">
         <Button variant="outline" size={'lg'} className="mt-4 w-full">
           Избранное
         </Button>
-      </Link>
+      </Link> */}
       <Link href="/dashboard/profile/other">
         <Button variant="outline" size={'lg'} className="mt-4 w-full">
           Прочие

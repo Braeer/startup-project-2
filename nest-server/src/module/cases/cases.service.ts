@@ -84,6 +84,13 @@ export class CasesService {
         userId,
         type: variant,
       },
+      include: {
+        case: {
+          select: {
+            title: true,
+          },
+        },
+      },
     });
 
     return completedCases;

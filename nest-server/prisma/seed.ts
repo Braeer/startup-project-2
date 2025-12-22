@@ -17,6 +17,7 @@ async function main() {
     Logger.log('Начало заполнения базы данных');
 
     await prisma.$transaction([
+      prisma.complitedCase.deleteMany(),
       prisma.handbook.deleteMany(),
       prisma.case.deleteMany(),
     ]);
