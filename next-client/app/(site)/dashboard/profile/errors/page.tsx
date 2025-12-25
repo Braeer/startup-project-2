@@ -16,10 +16,14 @@ export default function Page() {
     });
   }, []);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <BackScreenTitle title="Ошибки" />
-      {!loading && (
+      {data ? (
         <div className="flex flex-wrap w-full gap-4 mt-8">
           {data.map((item: any, _index: number) => (
             <Link key={_index} className="w-full" href={'/test/error/' + item.id}>
@@ -28,6 +32,10 @@ export default function Page() {
               </div>
             </Link>
           ))}
+        </div>
+      ) : (
+        <div className="flex justify-center items-center min-h-[calc(100vh-140px)]">
+          <p className="text-2xl font-bold">Нет ошибок</p>
         </div>
       )}
     </>
