@@ -5,8 +5,13 @@ import { getHandBooksById } from '@/services';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+type HandbookData = {
+  title: string;
+  content: string;
+};
+
 export default function HandbookPage() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<HandbookData | null>(null);
   const router = useParams();
 
   if (!router.id || Array.isArray(router.id)) {
@@ -20,7 +25,7 @@ export default function HandbookPage() {
       setData(res);
     });
 
-    return () => setData([]);
+    return () => setData(null);
   }, []);
 
   if (!data) {

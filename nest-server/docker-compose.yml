@@ -1,6 +1,27 @@
 version: '3.8'
+
 services:
-  db:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: nest_api
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${POSTGRES_URL}
+      PORT: ${APPLICATION_PORT}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
+      COOKIE_SECRET: ${COOKIE_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - '${APPLICATION_PORT}:${APPLICATION_PORT}'
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+  postgres:
     container_name: postgres
     image: postgres:17-alpine
     restart: always
