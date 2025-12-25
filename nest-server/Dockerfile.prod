@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:20
 
 WORKDIR /app
 
@@ -7,7 +7,7 @@ RUN yarn install
 
 COPY . .
 
-RUN npx prisma generate
+# RUN npx prisma generate
 RUN yarn build
 
-CMD ["yarn", "start:prod"]
+CMD ["npx", "prisma", "generate", "&&", "yarn", "run", "start:prod"]
