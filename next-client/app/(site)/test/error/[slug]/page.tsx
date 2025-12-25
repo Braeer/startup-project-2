@@ -5,8 +5,21 @@ import { getUserCompletedCaseById, updateUserCompletedCase } from '@/services';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+type DataTypes = {
+  case: {
+    fio: string;
+    age: number;
+    gender: string;
+    analysis: string[];
+    help: string;
+    answers: string[];
+    clinicalCase: string;
+    correctAnswer: string;
+  };
+};
+
 export default function Page() {
-  const [data, setData] = useState();
+  const [data, setData] = useState<DataTypes | null>(null);
   const params = useParams();
   const router = useRouter();
 
@@ -37,6 +50,10 @@ export default function Page() {
       console.error(error);
     }
   };
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <section>
