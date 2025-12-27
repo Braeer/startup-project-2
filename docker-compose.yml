@@ -24,11 +24,11 @@ services:
     build:
       context: ./next-client
       dockerfile: Dockerfile.prod
+      args:
+        - NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
     container_name: client_startup_project_2
     env_file:
       - .env
-    environment:
-      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
     ports:
       - '3000:3000'
     networks:
